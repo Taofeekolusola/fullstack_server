@@ -1,13 +1,14 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 
-const connectDb = async () => {
-    try {
-        const conn = await mongoose.connect("mongodb://root:mongo@localhost:27019/blogpost?authSource=admin");
-        console.log(`Connected to MongoDB: ${conn.connection.host}`);
-    } catch (err) {
-        console.error("Failed to connect to MongoDB", err);
-        process.exit(1);
-    }
-};
+// Load the MongoDB URI from the environment variable
+const dbURI = process.env.MONGODB_URI;
 
-module.exports = connectDb;
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Connected to MongoDB Atlas');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB Atlas:', err);
+  });

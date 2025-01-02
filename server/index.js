@@ -1,15 +1,14 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const mongoose = require('mongoose');
 const connectDb = require('./db');
 const postsRoutes = require('./routes/postsRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const userRoutes = require('./routes/userRoutes');
 const likeRoutes = require('./routes/likeRoutes');
 
-
-// Connect to MongoDB
-connectDb();
+require('dotenv').config();
 
 app.use(cors())
 app.use(express.json());
